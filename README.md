@@ -44,4 +44,4 @@ plusコマンドやjapanes_holidayコマンドを上記の方法で使用して�
   
   * このパッケージのtsvstat以外のコードは，[こちら](https://github.com/ryuichiueda/my_slides/tree/master/robosys_2022)のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです．
 
-  * © 2025 Jumpei Misu
+  * © 2025 misujumpei

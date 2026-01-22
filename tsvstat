@@ -1,50 +1,28 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2025 Jumpei Misu
+# SPDX-FileCopyrightText: 2025 misujumpei
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
+import argparse
 
+def main():
+    parser = argparse.ArgumentParser(description='TSVファイルの指定列の数値を集計します')
+    parser.add_argument('--col', type=int, required=True, help='集計する列番号')
+    args = parser.parse_args()
 
-def die(msg: str, code: int) -> None:
-    sys.stderr.write(msg + "\n")
-    raise SystemExit(code)
+    col_idx = args.col - 1 # 1始まりを0始まりに
+    total = 0.0
+    
+    for line in sys.stdin:
+        parts = line.strip().split('\t')
+        if len(parts) > col_idx:
+            try:
+                val = float(parts[col_idx])
+                total += val
+            except ValueError:
+                pass
+    
+    print(total)
 
-
-args = sys.argv[1:]
-col = None
-
-if "--col" in args:
-    i = args.index("--col")
-    if i + 1 < len(args):
-        try:
-            col = int(args[i + 1])
-        except ValueError:
-            die("tsvstat: --col must be an integer", 2)
-    else:
-        die("tsvstat: missing value for --col", 2)
-else:
-    die("tsvstat: required option --col N", 2)
-
-if col <= 0:
-    die("tsvstat: --col must be >= 1", 2)
-
-idx = col - 1
-
-total = 0.0
-lineno = 0
-for line in sys.stdin:
-    lineno += 1
-    line = line.rstrip("\n")
-    fields = line.split("\t")
-
-    if idx >= len(fields):
-        die(f"tsvstat: line {lineno}: column {col} missing", 1)
-
-    s = fields[idx]
-    try:
-        total += float(s)
-    except ValueError:
-        die(f"tsvstat: line {lineno}: not a number: {s}", 1)
-
-print(total)
-
+if __name__ == '__main__':
+    main()
