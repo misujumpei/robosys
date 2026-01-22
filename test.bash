@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2026 misujumpei
+# SPDX-License-Identifier: MIT
+
 
 ng () {
   echo "${1} line failed" 1>&2
