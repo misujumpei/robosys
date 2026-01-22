@@ -19,6 +19,6 @@ out=$(printf "a\t1\nb\n" | ./tsvstat --col 2 2>/dev/null)
 out=$(printf "a\t1\n" | ./tsvstat 2>/dev/null)
 [ "$?" = 2 ] || ng "$LINENO"
 
- "${res}" = 0 ] && echo OK
+[ "${res}" = 0 ] && echo OK
 exit $res
 
