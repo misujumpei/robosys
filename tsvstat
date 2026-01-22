@@ -9,9 +9,12 @@ if "--col" in args:
     if i + 1 < len(args):
         col = int(args[i + 1]) - 1
 
+total = 0.0
 for line in sys.stdin:
     line = line.rstrip("\n")
     fields = line.split("\t")
     if col is not None and col < len(fields):
-        print(fields[col])
+        total += float(fields[col])
+
+print(total)
 
