@@ -12,13 +12,13 @@ out=$(printf "a\t1\nb\t2\n" | ./tsvstat --col 2)
 [ "${out}" = 3.0 ] || ng "$LINENO"
 
 # MISSING COLUMN (exit 1)
-out=$(printf "a\t1\nb\n" | ./tsvstat --col 2)
+out=$(printf "a\t1\nb\n" | ./tsvstat --col 2 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
 
 # MISSING OPTION (exit 2)
-out=$(printf "a\t1\n" | ./tsvstat)
+out=$(printf "a\t1\n" | ./tsvstat 2>/dev/null)
 [ "$?" = 2 ] || ng "$LINENO"
 
-[ "${res}" = 0 ] && echo OK
+ "${res}" = 0 ] && echo OK
 exit $res
 
