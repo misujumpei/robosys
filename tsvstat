@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 import sys
 
-data = sys.stdin.read()
-sys.stdout.write(data)
+col = None
+args = sys.argv[1:]
+
+if "--col" in args:
+    i = args.index("--col")
+    if i + 1 < len(args):
+        col = int(args[i + 1]) - 1
+
+for line in sys.stdin:
+    line = line.rstrip("\n")
+    fields = line.split("\t")
+    if col is not None and col < len(fields):
+        print(fields[col])
 
